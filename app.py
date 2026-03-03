@@ -106,3 +106,10 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+    from flask import render_template, redirect, url_for, session
+
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    return render_template('dashboard.html')
